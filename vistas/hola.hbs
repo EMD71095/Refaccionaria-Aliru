@@ -1,0 +1,251 @@
+<style>
+    body {
+        background-image: url('/img/f5.jpg');
+        /* Ruta a la imagen de fondo */
+        background-size: cover;
+        /* Asegura que la imagen cubra toda la pantalla */
+        background-position: center;
+        /* Centra la imagen */
+        background-repeat:
+            no-repeat;
+        /* Evita que la imagen se repita */
+        font-family: "Oswald",
+            sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style:
+            normal;
+        color: white;
+    }
+
+    /*background: linear-gradient(0deg, #3463ba, #dde9ef);
+  /* Degradado de azul oscuro a azul claro */
+    /*background: conic-gradient(from
+  292.5deg, #B6C0C5, #112D60); /*Degradado de azul oscuro a azul claro
+  /*background: radial-gradient(circle, #B6C0C5, #112D60); /* Degradado de azul
+  oscuro a azul claro */
+    nav {
+        /*background: #112D60 !important;*/
+        border-bottom: 2px solid white;
+    }
+
+    #map {
+        width: 99vw;
+        height: 95vh;
+        /*
+  Asegúrate de que el contenedor tenga posición relativa */
+    }
+
+    .bt {
+        position:
+            fixed;
+        /* Fija el botón a la ventana de la página */
+        bottom: 20px;
+        /* Ajusta
+  la distancia desde la parte inferior de la ventana */
+        right: 20px;
+        /* Ajusta
+  la distancia desde el lado derecho de la ventana */
+        font-size: 18px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        padding: 0.7em 2em;
+        border: 3px solid #FF0072;
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+        color: #FF0072;
+        background: transparent;
+        text-decoration: none;
+        transition: 0.3s ease all;
+        cursor: pointer;
+        z-index:
+            1000;
+        /* Asegura que esté al frente de otros elementos */
+    }
+
+    .bt:before {
+        transition: 0.5s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        opacity: 0;
+        content: '';
+        background-color: #FF0072;
+        z-index: -1;
+    }
+
+    .bt:hover,
+    .bt:focus {
+        color: white;
+    }
+
+    .bt:hover:before,
+    .bt:focus:before {
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+    .bt:active {
+        transform: scale(0.9);
+    }
+
+    .bta {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color:
+            #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    .bta:before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition:
+            width 1000ms;
+    }
+
+    .bta:hover,
+    .bta:focus {
+        color: #ffffff;
+        transform:
+            scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    .bta:hover:before,
+    .bta:focus:before {
+        width: 250%;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">BUSINESSMAP</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapa">Mapa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/newComp">Añadir compañías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/allCompanies">Gestionar
+                        compañías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/terminos">Terminos y
+                        condiciones</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="map" style="width: 99vw; height: 95vh;">
+    <div class="cosas">
+        <a href="/newComp">
+            <button type="button" id="newComp" class="bta">Agregar
+                Compañía</button>
+        </a>
+        <a href="/logout">
+            <button type="button" class="bt">Salir</button>
+        </a>
+        <br /><br />
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" style="width: 360px;">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Localidad
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <nav id="filter-group" class="filter-group"></nav>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo">
+                        Estrato
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <nav id="filter-group-size" class="filter-group"></nav>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false"
+                        aria-controls="collapseThree">
+                        Industria
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body"
+                        style="overflow-y: scroll; height:300px;">
+                        <nav id="filter-group-ind" class="filter-group"></nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" value="{{companies}}" id="companias" style="display: none" />
+<input type="number" value="{{cantRat}}" id="cantRatings"
+    style="display: none" />
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
+<script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+<script src="/javascripts/denue2.js"></script>
